@@ -2,6 +2,18 @@ require 'fast_priority_queue/version'
 require 'thermite/fiddle'
 
 class FastPriorityQueue
+  def initialize
+    @array = []
+    if block_given?
+      @cmp = ->(a,b) { yield a,b }
+    else
+      @cmp = ->(a,b) { a <=> b }
+    end
+  end
+
+  def compare(a,b)
+    _compare(@cmp,a,b)
+  end
 end
 
 toplevel_dir = File.dirname(File.dirname(__FILE__))

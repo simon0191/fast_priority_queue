@@ -1,0 +1,10 @@
+[package]
+name = "fast_priority_queue"
+version = "0.1.0"
+authors = ["Simon Soriano <simon0191@gmail.com>"]
+
+[dependencies]
+ruru = "0.8.0"
+
+[lib]
+crate-type = ["dylib"]

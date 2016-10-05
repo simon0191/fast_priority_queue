@@ -1,0 +1,15 @@
+# ruby
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rust
+target/
+Cargo.lock
+mkmf.log

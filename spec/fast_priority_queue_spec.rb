@@ -5,7 +5,7 @@ describe FastPriorityQueue do
     expect(FastPriorityQueue::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(true).to eq(true)
+  it "defines hello_world method in rust" do
+    expect(FastPriorityQueue.new.hello_world).to eq('hello world')
   end
 end

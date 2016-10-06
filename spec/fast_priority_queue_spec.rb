@@ -55,7 +55,7 @@ describe FastPriorityQueue do
 
     context "with multiple elements" do
       it "always return the correct top element" do
-        arr = 100.times.map { rand(100) }
+        arr = 1000.times.map { rand(100) }
         curr_min = arr[0]
         arr.each do |x|
           curr_min = [curr_min,x].min
@@ -65,6 +65,35 @@ describe FastPriorityQueue do
       end
     end
 
+  end
+
+  describe "#pop" do
+    context "with empty queue" do
+      it "returns nil" do
+        expect(fpq.pop).to be_nil
+      end
+    end
+
+    context "with multiple elements" do
+
+      it "decrease the size of the queue" do
+        fpq.add 1
+        fpq.add 2
+        expect { fpq.pop }.to change{fpq.length}.from(2).to(1)
+        expect { fpq.pop }.to change{fpq.length}.from(1).to(0)
+        expect { fpq.pop }.to_not change { fpq.length }
+        expect { fpq.pop }.to_not change { fpq.length }
+      end
+
+      it "return the top element" do
+        1000.times.map { fpq.add rand(100) }
+        arr = []
+        while fpq.length > 0
+          arr << fpq.pop
+        end
+        expect( (1...arr.length).all? { |i| arr[i] >= arr[i-1] } ).to eq(true)
+      end
+    end
   end
 
 end

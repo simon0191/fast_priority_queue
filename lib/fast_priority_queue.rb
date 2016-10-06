@@ -11,6 +11,10 @@ class FastPriorityQueue
     end
   end
 
+  def length
+    @array.length - 1
+  end
+
   def compare(a,b)
     _compare(@cmp,a,b)
   end
@@ -21,6 +25,20 @@ class FastPriorityQueue
 
   def top
     @array[1]
+  end
+
+  def pop
+    if length == 0
+      nil
+    elsif length == 1
+      @array.pop
+    else
+      top_val = top
+      @array[1] = @array[-1]
+      @array.pop
+      _bubble_down(@array,@cmp)
+      top_val
+    end
   end
 
 end

@@ -74,6 +74,14 @@ describe FastPriorityQueue do
       end
     end
 
+    context "with 1 element" do
+      it "returns the element" do
+        a = 234
+        fpq.add a
+        expect(fpq.pop).to eq(a)
+      end
+    end
+
     context "with multiple elements" do
 
       it "decrease the size of the queue" do
@@ -102,6 +110,7 @@ describe FastPriorityQueue do
         expect(fpq.empty?).to eq(true)
       end
     end
+
 
     context "with multiple elements" do
 

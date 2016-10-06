@@ -28,23 +28,28 @@ class FastPriorityQueue
   end
 
   def pop
-    if length == 0
-      nil
-    elsif length == 1
-      @array.pop
-    else
-      top_val = top
-      @array[1] = @array[-1]
-      @array.pop
-      _bubble_down(@array,@cmp)
-      top_val
-    end
+    _pop(@array,@cmp)
+#    if length > 1
+#      top_val = @array[1]
+#      @array[1] = @array[-1]
+#      @array.pop
+#      _bubble_down(@array,@cmp)
+#      top_val
+#    elsif length == 0
+#      nil
+#    elsif length == 1
+#      @array.pop
+#    end
   end
 
   def empty?
     length == 0
   end
 
+  def _pop_last_element
+    #TODO: find a way to do this in Rust
+    @array.pop
+  end
 end
 
 toplevel_dir = File.dirname(File.dirname(__FILE__))

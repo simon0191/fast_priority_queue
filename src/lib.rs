@@ -47,17 +47,29 @@ methods!(
         }
     }
 
-    fn _bubble_down(arr: Array, cmp: Proc) -> NilClass {
+    fn _pop(arr: Array, cmp: Proc) -> AnyObject {
         let mut arr = arr.unwrap();
         let cmp = cmp.unwrap();
-        let arr_len = arr.length() as i64;
+        let mut arr_len = arr.length() as i64;
+
+        if arr_len <= 1 {
+            return NilClass::new().to_any_object()
+        } else if arr_len == 2 {
+            return _itself.send("_pop_last_element",vec![]);
+        }
+
+        let top_val = arr.at(1);
+        let last_val = arr.at(arr_len - 1);
+        arr.store(1,last_val);
+        _itself.send("_pop_last_element",vec![]);
+        arr_len -= 1;
 
         let mut curr_index: i64 = 1;
 
         loop {
             let mut child_index = curr_index * 2;
             if child_index >= arr_len {
-                return NilClass::new()
+                return top_val;
             }
 
             let not_the_last_element = child_index + 1 < arr_len;
@@ -76,7 +88,7 @@ methods!(
                                     .unwrap()
                                     .to_i64();
             if cmp_result <= 0 {
-                return NilClass::new()
+                return top_val;
             }
             let curr = arr.at(curr_index);
             let child = arr.at(child_index);
@@ -94,6 +106,6 @@ pub extern fn init_fast_priority_queue() {
         itself.def("hello_world", hello_world);
         itself.def("_compare", _compare);
         itself.def("_add", _add);
-        itself.def("_bubble_down", _bubble_down);
+        itself.def("_pop", _pop);
     });
 }

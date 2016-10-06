@@ -15,10 +15,6 @@ class FastPriorityQueue
     @array.length - 1
   end
 
-  def compare(a,b)
-    _compare(@cmp,a,b)
-  end
-
   def add(x)
     _add(@array,@cmp,x)
   end

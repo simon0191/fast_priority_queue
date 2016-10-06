@@ -12,11 +12,6 @@ methods!(
         RString::new("hello world")
     }
 
-    fn _compare(cmp: Proc, a: AnyObject,b: AnyObject) -> Fixnum {
-        let result = cmp.unwrap().call(vec![a.unwrap(),b.unwrap()]);
-        result.try_convert_to::<Fixnum>().unwrap()
-    }
-
     fn _add(arr: Array, cmp: Proc, x: AnyObject) -> NilClass {
         let mut arr = arr.unwrap();
         let x = x.unwrap();
@@ -103,8 +98,6 @@ methods!(
 #[no_mangle]
 pub extern fn init_fast_priority_queue() {
     Class::from_existing("FastPriorityQueue").define(|itself| {
-        itself.def("hello_world", hello_world);
-        itself.def("_compare", _compare);
         itself.def("_add", _add);
         itself.def("_pop", _pop);
     });

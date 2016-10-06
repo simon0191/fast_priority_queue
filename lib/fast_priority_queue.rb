@@ -2,6 +2,9 @@ require 'fast_priority_queue/version'
 require 'thermite/fiddle'
 
 class FastPriorityQueue
+
+  attr_reader :cmp
+
   def initialize
     @array = [nil]
     if block_given?
@@ -25,17 +28,6 @@ class FastPriorityQueue
 
   def pop
     _pop(@array,@cmp)
-#    if length > 1
-#      top_val = @array[1]
-#      @array[1] = @array[-1]
-#      @array.pop
-#      _bubble_down(@array,@cmp)
-#      top_val
-#    elsif length == 0
-#      nil
-#    elsif length == 1
-#      @array.pop
-#    end
   end
 
   def empty?

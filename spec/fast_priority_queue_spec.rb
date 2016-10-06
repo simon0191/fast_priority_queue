@@ -1,7 +1,22 @@
 require "spec_helper"
 
+class Patient < Struct.new(:name,:age,:severity)
+end
+
 describe FastPriorityQueue do
   let(:fpq) { FastPriorityQueue.new }
+  let(:patients_queue)  do
+    FastPriorityQueue.new do |a,b|
+      if a.severity != b.severity
+        b.severity <=> a.severity
+      elsif  a.age != b.age
+        b.age <=> a.age
+      else
+        a.name <=> b.name
+      end
+    end
+  end
+
   it "has a version number" do
     expect(FastPriorityQueue::VERSION).not_to be nil
   end
@@ -101,6 +116,18 @@ describe FastPriorityQueue do
         expect(fpq.empty?).to eq(false)
       end
 
+    end
+  end
+
+  context "with patients" do
+    describe "#top" do
+      it "return the correct patient" do
+        patients = 100.times.map { |i| Patient.new("name #{i}",rand(80),rand(3)) }
+        patients.each { |p| patients_queue.add p }
+        sorted_patients = []
+        sorted_patients << patients_queue.pop until patients_queue.empty?
+        expect(sorted_patients).to eq(patients.sort &patients_queue.cmp)
+      end
     end
   end
 

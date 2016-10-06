@@ -60,12 +60,8 @@ methods!(
         arr_len -= 1;
 
         let mut curr_index: i64 = 1;
-
-        loop {
+        while curr_index * 2 < arr_len {
             let mut child_index = curr_index * 2;
-            if child_index >= arr_len {
-                return top_val;
-            }
 
             let not_the_last_element = child_index + 1 < arr_len;
             if not_the_last_element {
@@ -92,6 +88,7 @@ methods!(
 
             curr_index = child_index;
         }
+        return top_val;
     }
 );
 

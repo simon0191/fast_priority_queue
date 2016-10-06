@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Simon Soriano"]
   spec.email         = ["simon0191@gmail.com"]
 
-  spec.summary       = "Fast priority queue using Rust"
-  spec.description   = "Fast priority queue using Rust"
+  spec.summary       = "Priority queue implementation using Rust"
+  spec.description   = "A blazzingly fast implementation of priority queue using Rust + Ruru"
   spec.homepage      = "https://github.com/simon0191/fast_priority_queue"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

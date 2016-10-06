@@ -34,4 +34,17 @@ describe FastPriorityQueue do
     end
   end
 
+  describe "#add" do
+    it "returns nil" do
+      expect(fpq.add(1)).to eq(nil)
+    end
+
+    it "increases size" do
+      expect { fpq.add("xxx") }.to change{fpq.length}.from(0).to(1)
+      expect { fpq.add("yyy") }.to change{fpq.length}.from(1).to(2)
+      expect { fpq.add("aaa") }.to change{fpq.length}.from(2).to(3)
+    end
+
+  end
+
 end

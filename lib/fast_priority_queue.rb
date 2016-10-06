@@ -3,7 +3,7 @@ require 'thermite/fiddle'
 
 class FastPriorityQueue
   def initialize
-    @array = []
+    @array = [nil]
     if block_given?
       @cmp = ->(a,b) { yield a,b }
     else
@@ -14,6 +14,11 @@ class FastPriorityQueue
   def compare(a,b)
     _compare(@cmp,a,b)
   end
+
+  def add(x)
+    _add(@array,@cmp,x)
+  end
+
 end
 
 toplevel_dir = File.dirname(File.dirname(__FILE__))

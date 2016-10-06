@@ -41,6 +41,10 @@ class FastPriorityQueue
     end
   end
 
+  def empty?
+    length == 0
+  end
+
 end
 
 toplevel_dir = File.dirname(File.dirname(__FILE__))

@@ -96,4 +96,25 @@ describe FastPriorityQueue do
     end
   end
 
+  describe "#empty?" do
+    context "with empty queue" do
+      it "return true" do
+        expect(fpq.empty?).to eq(true)
+      end
+    end
+
+    context "with multiple elements" do
+
+      it "return false" do
+        fpq.add 1
+        expect(fpq.empty?).to eq(false)
+        fpq.add 2
+        expect(fpq.empty?).to eq(false)
+        fpq.add 3
+        expect(fpq.empty?).to eq(false)
+      end
+
+    end
+  end
+
 end

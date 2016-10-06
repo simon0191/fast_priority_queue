@@ -19,6 +19,10 @@ class FastPriorityQueue
     _add(@array,@cmp,x)
   end
 
+  def top
+    @array[1]
+  end
+
 end
 
 toplevel_dir = File.dirname(File.dirname(__FILE__))

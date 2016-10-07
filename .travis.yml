@@ -1,5 +1,7 @@
-sudo: false
+sudo: true
 language: ruby
 rvm:
   - 2.3.1
-before_install: gem install bundler -v 1.13.2
+before_install:
+  - curl -sSf https://static.rust-lang.org/rustup.sh | sh
+  - gem install bundler -v 1.13.2

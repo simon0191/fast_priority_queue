@@ -1,5 +1,47 @@
 sudo: false
-language: ruby
-rvm:
-  - 2.3.1
-before_install: gem install bundler -v 1.13.2
+language: rust
+os:
+- linux
+- osx
+osx_image: xcode8
+rust:
+- stable
+env:
+  matrix:
+  - FPQ_RUBY_VERSION: 2.2.5
+  - FPQ_RUBY_VERSION: 2.3.1
+
+cache:
+- bundler: true
+- cargo: true
+
+before_install:
+- |
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    if [[ "$FPQ_RUBY_VERSION" =~ "2.2." ]]; then
+      rvm use "$FPQ_RUBY_VERSION"
+      ruby -e 'require "pp"; pp RbConfig::CONFIG'
+      # reinstall 2.2.x built with shared libraries
+      rvm reinstall "$FPQ_RUBY_VERSION" --disable-binary
+    fi
+  else
+    rvm install "$FPQ_RUBY_VERSION"
+  fi
+  rvm use "$FPQ_RUBY_VERSION"
+  ruby --version
+  ruby -e 'require "pp"; pp RbConfig::CONFIG'
+- bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}
+
+before_script:
+- |
+  export PATH=$HOME/Library/Python/2.7/bin:$HOME/.local/bin:$PATH
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]] && ! which pip > /dev/null; then
+    wget https://bootstrap.pypa.io/get-pip.py
+    python get-pip.py --user
+  fi
+  pip install 'travis-cargo<0.2' --user
+script:
+- travis-cargo build
+- bundle exec rake test
+- bundle exec rake thermite:tarball
+- bundle exec rake install

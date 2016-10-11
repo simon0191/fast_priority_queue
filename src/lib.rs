@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate ruru;
 
-use ruru::{Class,Object,RString,Fixnum,AnyObject,Array,Proc,NilClass};
+use ruru::{Class, Object, RString, Fixnum, AnyObject, Array, Proc, NilClass};
 class!(FastPriorityQueue);
 
 methods!(
@@ -17,7 +17,7 @@ methods!(
         let x = x.unwrap();
         let cmp = cmp.unwrap();
         arr.push(x);
-        // bubble_up
+// bubble_up
         let mut curr_index = (arr.length() - 1) as i64;
         loop {
             if curr_index <= 1 {
@@ -34,7 +34,7 @@ methods!(
             if cmp_result > 0 {
                 return NilClass::new();
             }
-            // exchange
+// exchange
             arr.store(curr_index,parent);
             arr.store(parent_index,curr);
 
@@ -93,7 +93,7 @@ methods!(
 );
 
 #[no_mangle]
-pub extern fn init_fast_priority_queue() {
+pub extern "C" fn init_fast_priority_queue() {
     Class::from_existing("FastPriorityQueue").define(|itself| {
         itself.def("_add", _add);
         itself.def("_pop", _pop);

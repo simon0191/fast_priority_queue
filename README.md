@@ -1,5 +1,6 @@
 # FastPriorityQueue
 
+[![Build Status](https://travis-ci.org/simon0191/fast_priority_queue.svg?branch=master)](https://travis-ci.org/simon0191/fast_priority_queue)
 [![Gem Version](https://badge.fury.io/rb/fast_priority_queue.svg)](https://badge.fury.io/rb/fast_priority_queue)
 
 A blazzingly fast implementation of priority queue using [Rust](https://www.rust-lang.org/en-US/) + [Ruru](https://github.com/d-unseductable/ruru)

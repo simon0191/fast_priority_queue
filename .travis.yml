@@ -1,5 +1,35 @@
+# Based on https://github.com/malept/rusty_blank/blob/master/.travis.yml
+
 sudo: false
-language: ruby
-rvm:
-  - 2.3.1
-before_install: gem install bundler -v 1.13.2
+language: rust
+os:
+- linux
+osx_image: xcode8
+rust:
+- stable
+env:
+  matrix:
+  - FPQ_RUBY_VERSION: 2.2.5
+  - FPQ_RUBY_VERSION: 2.3.1
+
+cache:
+- bundler: true
+- cargo: true
+
+before_install:
+- |
+  rvm install "$FPQ_RUBY_VERSION"
+  rvm use "$FPQ_RUBY_VERSION"
+  ruby --version
+  ruby -e 'require "pp"; pp RbConfig::CONFIG'
+- bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}
+
+before_script:
+- |
+  export PATH=$HOME/Library/Python/2.7/bin:$HOME/.local/bin:$PATH
+  pip install 'travis-cargo<0.2' --user
+script:
+- travis-cargo build
+- bundle exec rake test
+- bundle exec rake thermite:tarball
+- bundle exec rake install

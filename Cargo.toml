@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Simon Soriano <simon0191@gmail.com>"]
 
 [dependencies]
-ruru = "0.8.1"
+ruru = "0.9.3"
 
 [lib]
 crate-type = ["dylib"]
